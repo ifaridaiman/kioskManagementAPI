@@ -2,6 +2,7 @@
 
 namespace App\Services\Collection;
 
+use Illuminate\Support\Str;
 use App\Models\PaymentGateway\Collection;
 
 class StoreService
@@ -20,6 +21,8 @@ class StoreService
 
         $collection->name = $data->title;
         $collection->secret = $data->id;
+        $collection->payment_gateway = 'BillPlz';
+        $collection->collection_key = Str::uuid();
 
         $collection->save();
 

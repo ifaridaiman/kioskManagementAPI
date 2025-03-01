@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Models\PaymentGateway;
+namespace App\Models;
 
+use App\Models\PaymentGateway\Bill;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Collection extends Model
+class Payment extends Model
 {
     use SoftDeletes, HasUuids;
 
     protected $fillable = [
         'name',
-        'secret',
-        'payment_gateway',
-        'collection_key',
-        'status'
+        'email',
+        'description',
+        'reference'
     ];
+
+    public function bill()
+    {
+        return $this->hasOne(Bill::class);
+    }
 }

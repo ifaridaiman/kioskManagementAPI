@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Services\PaymentGateway\BillPlz\CreateCollectionService;
+use Illuminate\Http\Request;
 use Illuminate\Console\Command;
+use App\Services\PaymentGateway\BillPlz\CreateBillService;
+use App\Services\PaymentGateway\BillPlz\CreateCollectionService;
 
 class TestCommand extends Command
 {
@@ -26,8 +28,16 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $collection = new CreateCollectionService();
+        $collection = new CreateBillService();
 
-        $collection->create('From Laravel');
+        $request = new Request([
+            'collection_id' => 'xwisqn7c',
+            'descr' => 'testing',
+            'email' => 'adlyalimin.work@gmail.com',
+            'name' => 'Adly Alimin',
+            'amount' => '10.40'
+        ]);
+
+        $collection->create($request);
     }
 }
