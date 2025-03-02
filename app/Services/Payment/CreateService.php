@@ -2,10 +2,10 @@
 
 namespace App\Services\Payment;
 
-use App\Models\Payment;
-use App\Models\PaymentGateway\Bill;
-use Carbon\Carbon;
 use Exception;
+use Carbon\Carbon;
+use App\Models\Payment;
+use App\Models\PaymentGateway\GatewayBill;
 
 class CreateService
 {
@@ -28,7 +28,7 @@ class CreateService
             $payment->reference = $request->reference;
             $payment->amount = $request->amount;
 
-            $bill = new Bill([
+            $bill = new GatewayBill([
                 'payment_gateway' => $collection->payment_gateway,
                 'bill_code' => $bill->id,
                 'status' => $bill->state,
@@ -40,7 +40,7 @@ class CreateService
             $payment->save();
             $payment->bill()->save($bill);
 
-            return $payment;
+            return $payment->load('bill');
 
         } catch (Exception $e) {
             throw $e;

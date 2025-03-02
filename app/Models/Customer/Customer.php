@@ -1,28 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Customer;
 
 use App\Models\Order\Order;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\PaymentGateway\GatewayBill;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Payment extends Model
+class Customer extends Model
 {
     use SoftDeletes, HasUuids;
 
     protected $fillable = [
         'name',
         'email',
-        'description',
-        'reference'
+        'phone_number',
+        'address'
     ];
-
-    public function bill()
-    {
-        return $this->hasOne(GatewayBill::class);
-    }
 
     public function order()
     {

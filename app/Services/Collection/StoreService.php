@@ -3,7 +3,7 @@
 namespace App\Services\Collection;
 
 use Illuminate\Support\Str;
-use App\Models\PaymentGateway\Collection;
+use App\Models\PaymentGateway\GatewayCollection;
 
 class StoreService
 {
@@ -17,7 +17,7 @@ class StoreService
 
     public function store($data)
     {
-        $collection = new Collection;
+        $collection = new GatewayCollection;
 
         $collection->name = $data->title;
         $collection->secret = $data->id;

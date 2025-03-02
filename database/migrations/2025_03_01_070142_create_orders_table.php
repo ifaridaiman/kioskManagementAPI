@@ -10,21 +10,23 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('gateway_bills', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('payment_id')
+            $table->foreignUuid('customer_id')
+                ->nullable()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('payment_gateway');
-            $table->string('bill_code');
-            $table->string('status');
-            $table->decimal('amount', 10, 4);
-            $table->dateTime('due_to');
-            $table->text('url');
-            $table->dateTime('paid_at')->nullable();
-            $table->string('success_url')->nullable();
-            $table->string('failed_url')->nullable();
+            $table->foreignUuid('order_type_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignUuid('payment_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +37,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('orders');
     }
 };

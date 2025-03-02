@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\PaymentInterface;
 use Exception;
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
+use App\Interfaces\PaymentInterface;
 
 class PaymentController extends Controller
 {
@@ -18,6 +19,33 @@ class PaymentController extends Controller
     {
         try {
             return $this->paymentInterface->create($request, $id);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e]);
+        }
+    }
+
+    public function redirectUrl(Request $request)
+    {
+        try {
+            $redirect = $this->paymentInterface->redirectUrl($request);
+
+            $agent = new Agent();
+
+            if ($agent->isMobile() || $agent->isPhone()) {
+                return $redirect->success_url;
+            } else {
+                return $redirect;
+            }
+
+        } catch (Exception $e) {
+            return response()->json(['message' => $e]);
+        }
+    }
+
+    public function callbackUrl(Request $request)
+    {
+        try {
+            return $this->paymentInterface->callbackUrl($request);
         } catch (Exception $e) {
             return response()->json(['message' => $e]);
         }

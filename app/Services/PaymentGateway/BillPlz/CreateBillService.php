@@ -26,6 +26,7 @@ class CreateBillService
                     'email' => $request->email,
                     'name' => $request->name,
                     'amount' => $request->amount * 100,
+                    'redirect_url' => config('paymentgateway.billplz.redirect_url'),
                     'callback_url' => config('paymentgateway.billplz.callback_url')
                 ]);
 

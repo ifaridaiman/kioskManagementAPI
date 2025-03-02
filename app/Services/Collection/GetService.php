@@ -2,8 +2,8 @@
 
 namespace App\Services\Collection;
 
-use App\Models\PaymentGateway\Collection;
 use Exception;
+use App\Models\PaymentGateway\GatewayCollection;
 
 class GetService
 {
@@ -18,7 +18,7 @@ class GetService
     public function getFirst($id)
     {
         try {
-            return Collection::find($id);
+            return GatewayCollection::findOrFail($id);
         } catch (Exception $e) {
             throw $e;
         }

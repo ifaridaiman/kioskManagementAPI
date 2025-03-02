@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bill extends Model
+class GatewayBill extends Model
 {
     use SoftDeletes, HasUuids;
 
@@ -18,7 +18,10 @@ class Bill extends Model
         'status',
         'amount',
         'due_to',
-        'url'
+        'url',
+        'paid_at',
+        'success_url',
+        'failed_url'
     ];
 
     public function payment()

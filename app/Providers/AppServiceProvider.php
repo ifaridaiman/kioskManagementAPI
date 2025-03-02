@@ -2,11 +2,17 @@
 
 namespace App\Providers;
 
-use App\Interfaces\PaymentGateway\BillPlz\CollectionInterface;
+use App\Interfaces\MenuInterface;
+use App\Interfaces\Order\OrderInterface;
 use App\Interfaces\PaymentInterface;
-use App\Repositories\PaymentGateway\BillPlz\CollectionRepository;
+use App\Repositories\MenuRepository;
+use App\Repositories\Order\OrderRepository;
 use App\Repositories\PaymentRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\Order\OrderTypeInterface;
+use App\Repositories\Order\OrderTypeRepository;
+use App\Interfaces\PaymentGateway\BillPlz\CollectionInterface;
+use App\Repositories\PaymentGateway\BillPlz\CollectionRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(CollectionInterface::class, CollectionRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
+        $this->app->bind(MenuInterface::class, MenuRepository::class);
+
+        //Order
+        $this->app->bind(OrderInterface::class, OrderRepository::class);
+        $this->app->bind(OrderTypeInterface::class, OrderTypeRepository::class);
     }
 
     /**

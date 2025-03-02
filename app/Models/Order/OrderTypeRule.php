@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Models\PaymentGateway;
+namespace App\Models\Order;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Collection extends Model
+class OrderTypeRule extends Model
 {
     use SoftDeletes, HasUuids;
 
     protected $fillable = [
-        'name',
-        'secret',
-        'payment_gateway',
-        'collection_key',
-        'status'
+        'order_type_id',
+        'rule_type',
+        'close_time',
     ];
 }

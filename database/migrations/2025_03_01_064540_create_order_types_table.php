@@ -10,13 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('gateway_collections', function (Blueprint $table) {
+        Schema::create('order_types', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('secret');
-            $table->string('payment_gateway');
-            $table->uuid('collection_key');
-            $table->string('status')->default('active');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('collections');
+        Schema::dropIfExists('order_types');
     }
 };
