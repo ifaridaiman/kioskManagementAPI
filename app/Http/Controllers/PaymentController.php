@@ -20,7 +20,7 @@ class PaymentController extends Controller
         try {
             return $this->paymentInterface->create($request, $id);
         } catch (Exception $e) {
-            return response()->json(['message' => $e]);
+            return response()->json(['message' => $e], 400);
         }
     }
 
@@ -38,7 +38,7 @@ class PaymentController extends Controller
             }
 
         } catch (Exception $e) {
-            return response()->json(['message' => $e]);
+            return response()->json(['message' => $e], 400);
         }
     }
 
@@ -47,7 +47,16 @@ class PaymentController extends Controller
         try {
             return $this->paymentInterface->callbackUrl($request);
         } catch (Exception $e) {
-            return response()->json(['message' => $e]);
+            return response()->json(['message' => $e], 400);
+        }
+    }
+
+    public function get()
+    {
+        try {
+            return $this->paymentInterface->get();
+        } catch (Exception $e) {
+            return response()->json(['message' => $e], 400);
         }
     }
 }

@@ -18,7 +18,16 @@ class MenuController extends Controller
         try {
             return $this->menuInterface->create($request);
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 404);
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+
+    public function get(Request $request)
+    {
+        try {
+            return $this->menuInterface->get($request);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
     }
 }

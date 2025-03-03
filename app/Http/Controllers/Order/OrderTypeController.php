@@ -19,7 +19,16 @@ class OrderTypeController extends Controller
         try {
             return $this->orderTypeInterface->create($request);
         } catch (Exception $e) {
-            return response()->json(['message' => $e], 404);
+            return response()->json(['message' => $e], 400);
+        }
+    }
+
+    public function get()
+    {
+        try {
+            return $this->orderTypeInterface->get();
+        } catch (Exception $e) {
+            return response()->json(['message' => $e], 400);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Repositories\Order;
 
 use App\Interfaces\Order\OrderTypeInterface;
 use App\Services\Order\OrderType\CreateService;
+use App\Services\Order\OrderType\GetService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,7 @@ class OrderTypeRepository implements OrderTypeInterface
 
         try {
             $createService = new CreateService();
-            
+
             $response = $createService->create($request);
 
             DB::commit();
@@ -32,6 +33,17 @@ class OrderTypeRepository implements OrderTypeInterface
         } catch (Exception $e) {
             DB::rollBack();
 
+            throw $e;
+        }
+    }
+
+    public function get()
+    {
+        try {
+            $getService = new GetService();
+
+            return $getService->get();
+        } catch (Exception $e) {
             throw $e;
         }
     }

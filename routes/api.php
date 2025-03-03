@@ -17,6 +17,7 @@ Route::controller(CollectionController::class)->prefix('/collections')->group(fu
 });
 
 Route::controller(PaymentController::class)->prefix('/payments')->group(function () {
+    Route::get('/', 'get');
     Route::post('/{id}', 'create');
     Route::prefix('/callback')->group(function () {
         Route::get('/redirect', 'redirectUrl');
@@ -26,6 +27,7 @@ Route::controller(PaymentController::class)->prefix('/payments')->group(function
 
 Route::prefix('/orders')->group(function () {
     Route::controller(OrderTypeController::class)->prefix('/types')->group(function () {
+        Route::get('/', 'get');
         Route::post('/', 'create');
     });
     Route::controller(OrderController::class)->group(function () {
@@ -34,5 +36,6 @@ Route::prefix('/orders')->group(function () {
 });
 
 Route::controller(MenuController::class)->prefix('/menus')->group(function () {
+    Route::get('/', 'get');
     Route::post('/', 'create');
 });

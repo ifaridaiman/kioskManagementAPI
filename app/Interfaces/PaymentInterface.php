@@ -9,4 +9,6 @@ interface PaymentInterface
     public function redirectUrl($request);
 
     public function callbackUrl($request);
+
+    public function get();
 }

@@ -3,8 +3,9 @@
 namespace App\Repositories;
 
 use App\Interfaces\PaymentInterface;
-use App\Services\Collection\GetService;
+use App\Services\Collection\GetService as CollectionGetService;
 use App\Services\Payment\CreateService;
+use App\Services\Payment\GetService as PaymentGetService;
 use App\Services\Payment\RedirectUrlService;
 use App\Services\PaymentGateway\BillPlz\CreateBillService;
 use Exception;
@@ -18,7 +19,7 @@ class PaymentRepository implements PaymentInterface
 
         try {
 
-            $getCollectionService = new GetService();
+            $getCollectionService = new CollectionGetService();
             $createPaymentService = new CreateService();
             $createBillService = new CreateBillService();
 
@@ -60,5 +61,16 @@ class PaymentRepository implements PaymentInterface
     public function callbackUrl($request)
     {
 
+    }
+
+    public function get()
+    {
+        try {
+            $getService = new PaymentGetService();
+
+            return $getService->get();
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }
