@@ -19,7 +19,6 @@ class CreateBillService
     {
         try {
             $response = Http::withBasicAuth(config('paymentgateway.billplz.secret'), '')
-                // ->asForm()
                 ->post(config('paymentgateway.billplz.url') . '/v3/bills', [
                     'collection_id' => $collection->secret,
                     'description' => $request->description,

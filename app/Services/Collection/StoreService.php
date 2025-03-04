@@ -2,6 +2,7 @@
 
 namespace App\Services\Collection;
 
+use Exception;
 use Illuminate\Support\Str;
 use App\Models\PaymentGateway\GatewayCollection;
 
@@ -17,15 +18,19 @@ class StoreService
 
     public function store($data)
     {
-        $collection = new GatewayCollection;
+        try {
+            $collection = new GatewayCollection;
 
-        $collection->name = $data->title;
-        $collection->secret = $data->id;
-        $collection->payment_gateway = 'BillPlz';
-        $collection->collection_key = Str::uuid();
+            $collection->name = $data->title;
+            $collection->secret = $data->id;
+            $collection->payment_gateway = 'BillPlz';
+            $collection->collection_key = Str::uuid();
 
-        $collection->save();
+            $collection->save();
 
-        return $collection;
+            return $collection;
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }

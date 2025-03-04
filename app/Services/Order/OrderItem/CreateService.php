@@ -3,21 +3,32 @@
 namespace App\Services\Order\OrderItem;
 
 use App\Models\Order\OrderItem;
+use App\Services\Menu\CheckQuantityService;
 use Exception;
 
 class CreateService
 {
     public function create($request, $orderId)
     {
+        $quantityCheck = new CheckQuantityService();
+
         try {
             foreach ($request->items as $item) {
-                $orderItem = new OrderItem();
 
-                $orderItem->order_id = $orderId;
-                $orderItem->menu_id = $item["id"];
-                $orderItem->quantity = $item["quantity"];
+                $quantityStatus = $quantityCheck->checkQuantity($item["id"], $item["quantity"]);
 
-                $orderItem->save();
+                if ($quantityStatus) {
+                    $orderItem = new OrderItem();
+
+                    $orderItem->order_id = $orderId;
+                    $orderItem->menu_id = $item["id"];
+                    $orderItem->quantity = $item["quantity"];
+
+                    $orderItem->save();
+                } else {
+                    return $quantityStatus;
+                }
+
             }
         } catch (Exception $e) {
             throw $e;

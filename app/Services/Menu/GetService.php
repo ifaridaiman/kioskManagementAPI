@@ -20,11 +20,11 @@ class GetService
     {
         try {
             return Menu::with('menuInventory')
-            ->when($request->has('orderType'), function (Builder $query) use ($request) {
-                $query->whereHas('menuInventory', function (Builder $menuInventory) use ($request) {
-                    $menuInventory->where('order_type_id', $request->orderType);
-                });
-            })
+                ->when($request->has('orderType'), function (Builder $query) use ($request) {
+                    $query->whereHas('menuInventory', function (Builder $menuInventory) use ($request) {
+                        $menuInventory->where('order_type_id', $request->orderType);
+                    });
+                })
                 ->get();
 
         } catch (Exception $e) {

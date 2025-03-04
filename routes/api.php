@@ -3,6 +3,7 @@
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderTypeController;
+use App\Http\Controllers\Order\OrderTypeRuleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
@@ -26,9 +27,14 @@ Route::controller(PaymentController::class)->prefix('/payments')->group(function
 });
 
 Route::prefix('/orders')->group(function () {
-    Route::controller(OrderTypeController::class)->prefix('/types')->group(function () {
-        Route::get('/', 'get');
-        Route::post('/', 'create');
+    Route::prefix('/types')->group(function () {
+        Route::controller(OrderTypeRuleController::class)->prefix('/rules')->group(function () {
+            Route::post('/', 'create');
+        });
+        Route::controller(OrderTypeController::class)->group(function () {
+            Route::get('/', 'get');
+            Route::post('/', 'create');
+        });
     });
     Route::controller(OrderController::class)->group(function () {
         Route::post('/{id}', 'create');

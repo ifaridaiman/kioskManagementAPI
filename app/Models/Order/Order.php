@@ -15,7 +15,9 @@ class Order extends Model
     protected $fillable = [
         'customer_id',
         'order_type_id',
-        'payment_id'
+        'payment_id',
+        'payment_method',
+        'delivery_method'
     ];
 
     public function customer()
@@ -31,5 +33,15 @@ class Order extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class);
+    }
+
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function status()
+    {
+        return $this->hasMany(OrderStatus::class);
     }
 }

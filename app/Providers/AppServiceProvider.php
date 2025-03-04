@@ -10,8 +10,10 @@ use App\Repositories\Order\OrderRepository;
 use App\Repositories\PaymentRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\Order\OrderTypeInterface;
+use App\Interfaces\Order\OrderTypeRuleInterface;
 use App\Repositories\Order\OrderTypeRepository;
 use App\Interfaces\PaymentGateway\BillPlz\CollectionInterface;
+use App\Repositories\Order\OrderTypeRuleRepository;
 use App\Repositories\PaymentGateway\BillPlz\CollectionRepository;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         //Order
         $this->app->bind(OrderInterface::class, OrderRepository::class);
         $this->app->bind(OrderTypeInterface::class, OrderTypeRepository::class);
+        $this->app->bind(OrderTypeRuleInterface::class, OrderTypeRuleRepository::class);
     }
 
     /**

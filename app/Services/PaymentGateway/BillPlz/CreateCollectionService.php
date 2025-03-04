@@ -24,7 +24,7 @@ class CreateCollectionService
                     'title' => $title
                 ]);
 
-            if($response->successful()) {
+            if ($response->successful()) {
                 return $response->object();
             } else {
                 throw new Exception("BillPlz Create Collection Return Error");

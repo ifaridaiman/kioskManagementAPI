@@ -14,5 +14,11 @@ class OrderTypeRule extends Model
         'order_type_id',
         'rule_type',
         'close_time',
+        'close_date'
     ];
+
+    public function orderType()
+    {
+        return $this->belongsTo(OrderType::class);
+    }
 }
