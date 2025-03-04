@@ -18,7 +18,7 @@ class GetService
     public function get()
     {
         try {
-            return OrderType::all();
+            return OrderType::with('orderTypeRule')->get();
         } catch (Exception $e) {
             throw $e;
         }

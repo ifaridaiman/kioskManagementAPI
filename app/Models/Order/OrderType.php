@@ -28,6 +28,6 @@ class OrderType extends Model
 
     public function orderTypeRule()
     {
-        return $this->hasOne(OrderTypeRule::class);
+        return $this->hasMany(OrderTypeRule::class);
     }
 }
