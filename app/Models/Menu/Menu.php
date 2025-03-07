@@ -11,6 +11,7 @@ class Menu extends Model
     use SoftDeletes, HasUuids;
 
     protected $fillable = [
+        'menu_category_id',
         'title',
         'description',
         'price'
@@ -18,7 +19,12 @@ class Menu extends Model
 
     public function menuInventory()
     {
-        return $this->hasOne(MenuInventory::class);
+        return $this->hasMany(MenuInventory::class);
+    }
+
+    public function menuCategory()
+    {
+        return $this->belongsTo(MenuCategory::class);
     }
 
     protected static function boot()

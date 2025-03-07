@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Order;
 
+use App\Services\Order\GetService;
 use App\Services\Order\OrderStatus\CreateService as StatusCreateService;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,9 @@ class OrderRepository implements OrderInterface
             $createItem = new ItemCreateService();
             $createStatus = new StatusCreateService();
 
-            $payment = $this->paymentRepository->create($request, $id);
+            $total = calculateTotal($request);
+
+            $payment = $this->paymentRepository->create($request, $id, $total);
             $customer = $createCustomer->create($request);
             $order = $createOrder->create($request, $customer, $payment);
             $createItem->create($request, $order->id);
@@ -41,6 +44,17 @@ class OrderRepository implements OrderInterface
         } catch (Exception $e) {
             DB::rollBack();
 
+            throw $e;
+        }
+    }
+
+    public function get($requset)
+    {
+        try {
+            $getService = new GetService();
+
+            return $getService->get($requset);
+        } catch (Exception $e) {
             throw $e;
         }
     }

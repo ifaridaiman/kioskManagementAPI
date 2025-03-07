@@ -20,7 +20,8 @@ class CreateService
     {
         try {
             $menu = new Menu();
-
+            
+            $menu->menu_category_id = $request->menu_category_id;
             $menu->title = $request->title;
             $menu->description = $request->description;
             $menu->price = $request->price;

@@ -12,6 +12,10 @@ return new class extends Migration {
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('menu_category_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 4);

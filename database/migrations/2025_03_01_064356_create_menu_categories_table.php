@@ -10,8 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('order_type_rules', function (Blueprint $table) {
-            $table->date('close_date')->nullable();
+        Schema::create('menu_categories', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('title');
+            $table->string('description')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -20,8 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('order_type_rules', function (Blueprint $table) {
-            $table->dropColumn('close_date');
-        });
+        Schema::dropIfExists('menu_categories');
     }
 };

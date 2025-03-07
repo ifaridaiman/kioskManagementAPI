@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Menu;
 
-use App\Interfaces\MenuInterface;
+use App\Interfaces\Menu\MenuInterface;
 use App\Services\Menu\CreateService;
+use App\Services\Menu\FindService;
 use App\Services\Menu\GetService;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,17 @@ class MenuRepository implements MenuInterface
             $getService = new GetService();
 
             return $getService->get($request);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function find($id)
+    {
+        try {
+            $findService = new FindService();
+
+            return $findService->find($id);
         } catch (Exception $e) {
             throw $e;
         }

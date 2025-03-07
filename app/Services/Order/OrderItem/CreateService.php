@@ -13,7 +13,7 @@ class CreateService
         $quantityCheck = new CheckQuantityService();
 
         try {
-            foreach ($request->items as $item) {
+            foreach ($request->orders as $item) {
 
                 $quantityStatus = $quantityCheck->checkQuantity($item["id"], $item["quantity"]);
 

@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->integer('quantity');
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

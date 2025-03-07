@@ -13,7 +13,7 @@ class CheckQuantityService
             $currentQuantity = MenuInventory::where('menu_id', $menuId)->first();
 
             if ($currentQuantity) {
-                if ($currentQuantity >= $orderQuantity) {
+                if ($currentQuantity->quantity >= $orderQuantity) {
                     return true;
                 } else {
                     throw new Exception('Quantity for ' . $currentQuantity->menu->title . ' has exceed limit');

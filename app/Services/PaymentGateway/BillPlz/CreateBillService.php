@@ -15,16 +15,16 @@ class CreateBillService
         //
     }
 
-    public function create($request, $collection)
+    public function create($request, $collection, $total)
     {
         try {
             $response = Http::withBasicAuth(config('paymentgateway.billplz.secret'), '')
                 ->post(config('paymentgateway.billplz.url') . '/v3/bills', [
                     'collection_id' => $collection->secret,
                     'description' => $request->description,
-                    'email' => $request->email,
-                    'name' => $request->name,
-                    'amount' => $request->amount * 100,
+                    'email' => $request->customerDetails['email'],
+                    'name' => $request->customerDetails['name'],
+                    'amount' => $total * 100,
                     'redirect_url' => config('paymentgateway.billplz.redirect_url'),
                     'callback_url' => config('paymentgateway.billplz.callback_url')
                 ]);

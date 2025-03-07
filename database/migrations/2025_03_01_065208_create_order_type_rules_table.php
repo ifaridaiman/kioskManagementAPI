@@ -17,6 +17,7 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->string('rule_type');
+            $table->date('close_date')->nullable();
             $table->time('close_time')->nullable();
             $table->timestamps();
             $table->softDeletes();

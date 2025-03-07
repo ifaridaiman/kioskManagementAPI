@@ -12,10 +12,10 @@ class CreateService
         try {
             $customer = new Customer();
 
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone_number = $request->phone_number;
-            $customer->address = $request->address;
+            $customer->name = $request->customerDetails['name'];
+            $customer->email = $request->customerDetails['email'];
+            $customer->phone_number = $request->customerDetails['phone'];
+            $customer->address = $request->customerDetails['address'];
 
             $customer->save();
 

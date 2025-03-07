@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentRepository implements PaymentInterface
 {
-    public function create($request, $id)
+    public function create($request, $id, $total = 0)
     {
         DB::beginTransaction();
 
@@ -25,9 +25,9 @@ class PaymentRepository implements PaymentInterface
 
             $collection = $getCollectionService->getFirst($id);
 
-            $bill = $createBillService->create($request, $collection);
+            $bill = $createBillService->create($request, $collection, $total);
 
-            $payment = $createPaymentService->create($request, $bill, $collection);
+            $payment = $createPaymentService->create($request, $bill, $collection, $total);
 
             DB::commit();
 

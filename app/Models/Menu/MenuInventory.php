@@ -16,7 +16,9 @@ class MenuInventory extends Model
         'order_type_id',
         'quantity',
         'start_date',
-        'end_date'
+        'end_date',
+        'start_time',
+        'end_time'
     ];
 
     public function menu()
@@ -26,6 +28,6 @@ class MenuInventory extends Model
 
     public function orderType()
     {
-        return $this->hasOne(OrderType::class);
+        return $this->hasOne(OrderType::class, 'id', 'order_type_id');
     }
 }

@@ -19,7 +19,17 @@ class OrderController extends Controller
         try {
             return $this->orderInterface->create($request, $id);
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 404);
+            info($e);
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
+
+    public function list(Request $request)
+    {
+        try {
+            return $this->orderInterface->get($request);
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 }

@@ -17,22 +17,21 @@ class CreateService
         //
     }
 
-    public function create($request, $bill, $collection)
+    public function create($request, $bill, $collection, $total)
     {
         try {
             $payment = new Payment();
 
-            $payment->name = $request->name;
-            $payment->email = $request->email;
+            $payment->name = $request->customerDetails['name'];
+            $payment->email = $request->customerDetails['email'];
             $payment->description = $request->description;
-            $payment->reference = $request->reference;
-            $payment->amount = $request->amount;
+            $payment->amount = $total;
 
             $bill = new GatewayBill([
                 'payment_gateway' => $collection->payment_gateway,
                 'bill_code' => $bill->id,
                 'status' => $bill->state,
-                'amount' => $bill->amount / 100,
+                'amount' => $total / 100,
                 'due_to' => Carbon::parse($bill->due_at),
                 'url' => $bill->url
             ]);

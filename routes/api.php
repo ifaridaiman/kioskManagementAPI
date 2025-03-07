@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\Menu\MenuCategoryController;
+use App\Http\Controllers\Menu\MenuController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderTypeController;
 use App\Http\Controllers\Order\OrderTypeRuleController;
@@ -37,11 +38,18 @@ Route::prefix('/orders')->group(function () {
         });
     });
     Route::controller(OrderController::class)->group(function () {
+        Route::get('/', 'get');
         Route::post('/{id}', 'create');
     });
 });
 
-Route::controller(MenuController::class)->prefix('/menus')->group(function () {
-    Route::get('/', 'get');
-    Route::post('/', 'create');
+Route::prefix('/menus')->group(function () {
+    Route::controller(MenuCategoryController::class)->prefix('/categories')->group(function () {
+        Route::post('/', 'create');
+    });
+    Route::controller(MenuController::class)->group(function () {
+        Route::get('/', 'get');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create');
+    });
 });

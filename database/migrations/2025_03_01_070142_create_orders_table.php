@@ -27,6 +27,8 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string('payment_method');
+            $table->string('delivery_method');
             $table->timestamps();
             $table->softDeletes();
         });
