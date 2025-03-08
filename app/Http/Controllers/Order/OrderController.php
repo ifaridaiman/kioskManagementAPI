@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Order\OrderResource;
 use App\Interfaces\Order\OrderInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,15 +20,15 @@ class OrderController extends Controller
         try {
             return $this->orderInterface->create($request, $id);
         } catch (Exception $e) {
-            info($e);
             return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 
-    public function list(Request $request)
+    public function get(Request $request)
     {
         try {
-            return $this->orderInterface->get($request);
+            // return $this->orderInterface->get($request);
+            return OrderResource::collection($this->orderInterface->get($request));
         } catch (Exception $e) {
             return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }

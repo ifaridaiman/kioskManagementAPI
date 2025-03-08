@@ -33,4 +33,22 @@ class StoreService
             throw $e;
         }
     }
+
+    public function storeCod()
+    {
+        try {
+            $collection = new GatewayCollection;
+
+            $collection->name = "Cash on Delivery";
+            $collection->secret = Str::random(15);
+            $collection->payment_gateway = 'COD';
+            $collection->collection_key = Str::uuid();
+
+            $collection->save();
+
+            return $collection;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

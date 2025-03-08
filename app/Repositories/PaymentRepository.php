@@ -25,9 +25,14 @@ class PaymentRepository implements PaymentInterface
 
             $collection = $getCollectionService->getFirst($id);
 
-            $bill = $createBillService->create($request, $collection, $total);
+            if($collection->payment_gateway == 'COD') {
+                
+            } else {
+                $bill = $createBillService->create($request, $collection, $total);
 
-            $payment = $createPaymentService->create($request, $bill, $collection, $total);
+                $payment = $createPaymentService->create($request, $bill, $collection, $total);
+            }
+
 
             DB::commit();
 

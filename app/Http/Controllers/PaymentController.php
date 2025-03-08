@@ -7,7 +7,7 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use App\Interfaces\PaymentInterface;
 
-class PaymentController extends Controller
+class  PaymentController extends Controller
 {
     public function __construct(
         protected PaymentInterface $paymentInterface

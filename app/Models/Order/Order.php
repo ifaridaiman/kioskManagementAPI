@@ -22,17 +22,17 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->hasOne(Customer::class);
+        return $this->belongsTo(Customer::class);
     }
 
     public function orderType()
     {
-        return $this->hasOne(OrderType::class);
+        return $this->belongsTo(OrderType::class);
     }
 
     public function payment()
     {
-        return $this->hasOne(Payment::class);
+        return $this->belongsTo(Payment::class);
     }
 
     public function orderItem()

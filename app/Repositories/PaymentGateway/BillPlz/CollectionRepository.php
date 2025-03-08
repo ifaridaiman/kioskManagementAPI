@@ -24,17 +24,21 @@ class CollectionRepository implements CollectionInterface
         $gatewayCollectionService = new CreateCollectionService();
         $storeService = new StoreService();
 
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
 
-            $data = $gatewayCollectionService->create($request->title);
+            if ($request->title = 'Cash on Delivery') {
+                $collection = $storeService->storeCod();
+            } else {
+                $data = $gatewayCollectionService->create($request->title);
 
-            // Process the response before moving forward
-            if (!$data) {
-                throw new Exception("Failed to retrieve data from API");
+                // Process the response before moving forward
+                if (!$data) {
+                    throw new Exception("Failed to retrieve data from API");
+                }
+
+                $collection = $storeService->store($data);
             }
-
-            $collection = $storeService->store($data);
 
             DB::commit();
 

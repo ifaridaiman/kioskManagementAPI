@@ -19,10 +19,15 @@ class RedirectUrlService
             }
 
             if (!$request['billplz']['paid']) {
+
+                updateStatus($bill->payment->id, 'Payment Failed');
+
                 throw new Exception('Payment Failed.');
             }
 
             if ($bill) {
+                updateStatus($bill->payment->id, 'Payment Success');
+
                 $bill->status = 'paid';
                 $bill->paid_at = Carbon::parse($request['billplz']['paid_at']);
 

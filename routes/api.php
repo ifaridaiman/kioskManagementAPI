@@ -46,6 +46,7 @@ Route::prefix('/orders')->group(function () {
 
 Route::prefix('/menus')->group(function () {
     Route::controller(MenuCategoryController::class)->prefix('/categories')->group(function () {
+        Route::get('/', 'get');
         Route::post('/', 'create');
     });
     Route::controller(MenuController::class)->group(function () {

@@ -22,4 +22,13 @@ class MenuCategoryController extends Controller
             return response()->json(['data' => ['error' => [$e->getMessage()]]], 400);
         }
     }
+
+    public function get()
+    {
+        try {
+            return $this->menuCategoryInterface->get();
+        } catch (Exception $e) {
+            return response()->json(['data' => ['error' => [$e->getMessage()]]], 400);
+        }
+    }
 }

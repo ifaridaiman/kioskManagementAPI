@@ -11,7 +11,7 @@ class GetService
     public function get($request)
     {
         try {
-            return Order::with(['customer', 'orderType', 'payment', 'status'])
+            return Order::with(['customer', 'orderType', 'payment.bill', 'status'])
                 ->when($request->has('phoneNumber'), function (Builder $query) use ($request) {
                     $query->whereHas('customer', function (Builder $customer) use ($request) {
                         $customer->where('phone_number', $request->phoneNumber);

@@ -33,7 +33,9 @@ class CreateService
                 'status' => $bill->state,
                 'amount' => $total / 100,
                 'due_to' => Carbon::parse($bill->due_at),
-                'url' => $bill->url
+                'url' => $bill->url,
+                'success_url' => $request->successPath,
+                'failed_url' => $request->failedPath
             ]);
 
             $payment->save();
