@@ -15,6 +15,7 @@ use App\Http\Controllers\PaymentGateway\BillPlz\CollectionController;
 // })->middleware('auth:sanctum');
 
 Route::controller(CollectionController::class)->prefix('/collections')->group(function () {
+    Route::get('/', 'get');
     Route::post('/', 'create');
 });
 

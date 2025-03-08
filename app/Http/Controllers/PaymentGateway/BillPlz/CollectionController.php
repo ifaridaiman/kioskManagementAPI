@@ -19,7 +19,16 @@ class CollectionController extends Controller
         try {
             return $this->collectionInterface->create($request);
         } catch (Exception $e) {
-            return response()->json(['message'=> $e]);
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
+
+    public function get()
+    {
+        try {
+            return $this->collectionInterface->get();
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 

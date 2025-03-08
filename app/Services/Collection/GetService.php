@@ -23,4 +23,13 @@ class GetService
             throw $e;
         }
     }
+
+    public function get()
+    {
+        try {
+            return GatewayCollection::where('status', 'active')->get();
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

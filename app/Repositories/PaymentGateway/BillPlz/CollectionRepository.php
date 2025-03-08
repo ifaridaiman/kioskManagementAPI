@@ -3,6 +3,7 @@
 namespace App\Repositories\PaymentGateway\BillPlz;
 
 use App\Interfaces\PaymentGateway\BillPlz\CollectionInterface;
+use App\Services\Collection\GetService;
 use App\Services\Collection\StoreService;
 use App\Services\PaymentGateway\BillPlz\CreateCollectionService;
 use Exception;
@@ -38,9 +39,20 @@ class CollectionRepository implements CollectionInterface
             DB::commit();
 
             return $collection;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
 
+            throw $e;
+        }
+    }
+
+    public function get()
+    {
+        try {
+            $getService = new GetService();
+
+            return $getService->get();
+        } catch (Exception $e) {
             throw $e;
         }
     }
