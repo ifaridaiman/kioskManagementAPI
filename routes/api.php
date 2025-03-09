@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Menu\MenuCategoryController;
 use App\Http\Controllers\Menu\MenuController;
 use App\Http\Controllers\Order\OrderController;
@@ -13,6 +14,10 @@ use App\Http\Controllers\PaymentGateway\BillPlz\CollectionController;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+
+Route::controller(CustomerController::class)->group(function () {
+    Route::get('/customers', 'get');
+});
 
 Route::controller(CollectionController::class)->prefix('/collections')->group(function () {
     Route::get('/', 'get');

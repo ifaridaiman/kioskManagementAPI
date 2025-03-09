@@ -7,7 +7,7 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use App\Interfaces\PaymentInterface;
 
-class  PaymentController extends Controller
+class PaymentController extends Controller
 {
     public function __construct(
         protected PaymentInterface $paymentInterface
@@ -29,16 +29,13 @@ class  PaymentController extends Controller
         try {
             $redirect = $this->paymentInterface->redirectUrl($request);
 
-            $agent = new Agent();
+            // $agent = new Agent();
 
-            if ($agent->isMobile() || $agent->isPhone()) {
-                return $redirect->success_url;
-            } else {
-                return $redirect;
-            }
+            return redirect()->away(config('mobileapplication.mobile_application.success') . '/' . $redirect->id);
 
         } catch (Exception $e) {
-            return response()->json(['message' => $e], 400);
+            return redirect()->away(config('mobileapplication.mobile_application.failed'));
+            // return response()->json(['message' => $e], 400);
         }
     }
 
