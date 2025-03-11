@@ -3,13 +3,17 @@
 use App\Models\Order\OrderStatus;
 
 if (!function_exists('updateStatus')) {
-    function updateStatus($id, $status)
+    function updateStatus($id, $currentStatus)
     {
-        $status = new OrderStatus();
+        try {
+            $order = new OrderStatus();
 
-        $status->order_id = $id;
-        $status->status = $status;
+            $order->order_id = $id;
+            $order->status = $currentStatus;
 
-        $status->save();
+            $order->save();
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }

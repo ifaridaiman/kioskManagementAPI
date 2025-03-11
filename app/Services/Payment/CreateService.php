@@ -31,7 +31,7 @@ class CreateService
                 'payment_gateway' => $collection->payment_gateway,
                 'bill_code' => $bill->id,
                 'status' => $bill->state,
-                'amount' => $total / 100,
+                'amount' => $total,
                 'due_to' => Carbon::parse($bill->due_at),
                 'url' => $bill->url,
                 'success_url' => $request->successPath,

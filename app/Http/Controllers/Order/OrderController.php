@@ -33,4 +33,13 @@ class OrderController extends Controller
             return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            return new OrderResource($this->orderInterface->updateStatus($request, $id));
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
 }

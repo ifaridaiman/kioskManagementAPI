@@ -43,9 +43,13 @@ Route::prefix('/orders')->group(function () {
         Route::controller(OrderTypeController::class)->group(function () {
             Route::get('/', 'get');
             Route::post('/', 'create');
+            Route::patch('/{id}', 'update');
         });
     });
     Route::controller(OrderController::class)->group(function () {
+        Route::prefix('/statuses')->group(function () {
+            Route::patch('/{id}', 'updateStatus');
+        });
         Route::get('/', 'get');
         Route::post('/{id}', 'create');
     });

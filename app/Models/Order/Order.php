@@ -16,6 +16,7 @@ class Order extends Model
         'customer_id',
         'order_type_id',
         'payment_id',
+        'status',
         'payment_method',
         'delivery_method'
     ];
@@ -40,7 +41,7 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function status()
+    public function statuses()
     {
         return $this->hasMany(OrderStatus::class);
     }

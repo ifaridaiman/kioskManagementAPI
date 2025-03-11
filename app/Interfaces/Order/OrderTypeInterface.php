@@ -7,4 +7,6 @@ interface OrderTypeInterface
     public function create($request);
 
     public function get();
+
+    public function update($request, $id);
 }

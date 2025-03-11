@@ -20,7 +20,7 @@ class GetService
     {
         try {
             if ($request->has('phoneNumber')) {
-                $customers = Customer::with('order.orderItem', 'order.status')
+                $customers = Customer::with('order.orderItem', 'order.statuses')
                     ->where('phone_number', $request->phoneNumber)
                     ->get();
 

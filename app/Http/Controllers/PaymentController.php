@@ -34,8 +34,9 @@ class PaymentController extends Controller
             return redirect()->away(config('mobileapplication.mobile_application.success') . '/' . $redirect->id);
 
         } catch (Exception $e) {
-            return redirect()->away(config('mobileapplication.mobile_application.failed'));
-            // return response()->json(['message' => $e], 400);
+            // return redirect()->away(config('mobileapplication.mobile_application.failed'));
+            info($e->getMessage());
+            return response()->json(['message' => $e], 400);
         }
     }
 

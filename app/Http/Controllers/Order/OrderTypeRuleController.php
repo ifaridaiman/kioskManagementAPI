@@ -19,7 +19,16 @@ class OrderTypeRuleController extends Controller
         try {
             return $this->orderTypeRuleInterface->create($request);
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 }

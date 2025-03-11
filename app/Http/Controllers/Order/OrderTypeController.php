@@ -19,7 +19,7 @@ class OrderTypeController extends Controller
         try {
             return $this->orderTypeInterface->create($request);
         } catch (Exception $e) {
-            return response()->json(['message' => $e], 400);
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 
@@ -28,7 +28,16 @@ class OrderTypeController extends Controller
         try {
             return $this->orderTypeInterface->get();
         } catch (Exception $e) {
-            return response()->json(['message' => $e], 400);
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            return $this->orderTypeInterface->update($request, $id);
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 }
