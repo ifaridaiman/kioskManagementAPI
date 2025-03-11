@@ -27,7 +27,7 @@ class CollectionRepository implements CollectionInterface
         DB::beginTransaction();
         try {
 
-            if ($request->title = 'Cash on Delivery') {
+            if ($request->title == 'Cash on Delivery') {
                 $collection = $storeService->storeCod();
             } else {
                 $data = $gatewayCollectionService->create($request->title);

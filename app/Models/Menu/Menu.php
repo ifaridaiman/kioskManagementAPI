@@ -27,12 +27,18 @@ class Menu extends Model
         return $this->belongsTo(MenuCategory::class);
     }
 
+    public function menuAsset()
+    {
+        return $this->hasMany(MenuAsset::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
 
         static::deleting(function ($menu) {
             $menu->menuInventory()->delete(); // Soft delete child records
+            $menu->menuAsset()->delete();
         });
     }
 }

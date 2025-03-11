@@ -19,7 +19,8 @@ class MenuResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'price' => number_format($this->price, 2),
-            'inventory' => MenuInventoryResource::collection($this->menuInventory)
+            'inventory' => MenuInventoryResource::collection($this->menuInventory),
+            'assets' => MenuAssetResource::collection($this->menuAsset)
         ];
     }
 }

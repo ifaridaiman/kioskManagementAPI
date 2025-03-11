@@ -47,4 +47,22 @@ class MenuController extends Controller
             return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            return new MenuResource($this->menuInterface->update($request, $id));
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            return $this->menuInterface->delete($id);
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
 }

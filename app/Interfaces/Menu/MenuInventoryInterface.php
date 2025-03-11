@@ -2,11 +2,9 @@
 
 namespace App\Interfaces\Menu;
 
-interface MenuCategoryInterface
+interface MenuInventoryInterface
 {
-    public function create($request);
-
-    public function get();
+    public function create($request, $id);
 
     public function update($request, $id);
 

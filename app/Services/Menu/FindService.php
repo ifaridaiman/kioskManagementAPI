@@ -10,7 +10,7 @@ class FindService
     public function find($id)
     {
         try {
-            return Menu::with('menuInventory')->find($id);
+            return Menu::with(['menuInventory', 'menuAsset'])->find($id);
         } catch (Exception $e) {
             return $e;
         }

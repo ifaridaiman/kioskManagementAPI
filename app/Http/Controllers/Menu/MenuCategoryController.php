@@ -19,7 +19,7 @@ class MenuCategoryController extends Controller
         try {
             return $this->menuCategoryInterface->create($request);
         } catch (Exception $e) {
-            return response()->json(['data' => ['error' => [$e->getMessage()]]], 400);
+            return response()->json(['data' => ['message' => [$e->getMessage()]]], 400);
         }
     }
 
@@ -28,7 +28,25 @@ class MenuCategoryController extends Controller
         try {
             return $this->menuCategoryInterface->get();
         } catch (Exception $e) {
-            return response()->json(['data' => ['error' => [$e->getMessage()]]], 400);
+            return response()->json(['data' => ['message' => [$e->getMessage()]]], 400);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            return $this->menuCategoryInterface->update($request, $id);
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            return $this->menuCategoryInterface->delete($id);
+        } catch (Exception $e) {
+            return response()->json(['data' => ['message' => $e->getMessage()]], 400);
         }
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Customer;
+namespace App\Http\Resources\Menu;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CustomerResource extends JsonResource
+class MenuAssetResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,8 @@ class CustomerResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone_number' => $this->phone_number,
-            'address' => $this->address
+            'id' => $this->id,
+            'image_path' => $this->asset_path
         ];
     }
 }

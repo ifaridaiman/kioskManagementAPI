@@ -2,36 +2,40 @@
 
 namespace App\Repositories\Menu;
 
-use App\Services\Menu\MenuCategory\DeleteService;
-use App\Services\Menu\MenuCategory\UpdateService;
+use App\Interfaces\Menu\MenuInventoryInterface;
+use App\Services\Menu\MenuInventory\CreateService;
+use App\Services\Menu\MenuInventory\DeleteService;
+use App\Services\Menu\MenuInventory\UpdateService;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Interfaces\Menu\MenuCategoryInterface;
-use App\Services\Menu\MenuCategory\GetService;
-use App\Services\Menu\MenuCategory\CreateService;
 
-class MenuCategoryRepository implements MenuCategoryInterface
+class MenuInventoryRepository implements MenuInventoryInterface
 {
-    public function create($request)
+    /**
+     * Create a new class instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    public function create($request, $id)
     {
         DB::beginTransaction();
 
         try {
-            $createService = new CreateService;
 
-            return $createService->create($request);
+            $craeteService = new CreateService();
+
+            $create = $craeteService->create($request, $id);
+
+            DB::commit();
+
+            return $create;
+
         } catch (Exception $e) {
-            throw $e;
-        }
-    }
+            DB::rollBack();
 
-    public function get()
-    {
-        try {
-            $getService = new GetService();
-
-            return $getService->get();
-        } catch (Exception $e) {
             throw $e;
         }
     }

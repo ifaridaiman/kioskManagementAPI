@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Customer\Order;
 
+use App\Http\Resources\Customer\CustomerResource;
+use App\Http\Resources\Order\OrderResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,11 +16,10 @@ class CustomerOrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $customerName = array_key_first($this->resource->toArray());
-
         return [
-            'customer' => $customerName,
-            // 'orders' => $this
+            'name' => $this->name,
+            // 'customer' => new CustomerResource($this),
+            'orders' => new OrderResource($this->order)
         ];
     }
 }

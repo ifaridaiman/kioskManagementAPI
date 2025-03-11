@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Menu\MenuAssetController;
 use App\Http\Controllers\Menu\MenuCategoryController;
 use App\Http\Controllers\Menu\MenuController;
+use App\Http\Controllers\Menu\MenuInventoryController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderTypeController;
 use App\Http\Controllers\Order\OrderTypeRuleController;
@@ -53,10 +55,23 @@ Route::prefix('/menus')->group(function () {
     Route::controller(MenuCategoryController::class)->prefix('/categories')->group(function () {
         Route::get('/', 'get');
         Route::post('/', 'create');
+        Route::patch('/{id}', 'update');
+        Route::delete('/{id}', 'delete');
+    });
+    Route::controller(MenuInventoryController::class)->prefix('/inventories')->group(function () {
+        Route::post('/{id}', 'create');
+        Route::patch('/{id}', 'update');
+        Route::delete('/{id}', 'delete');
+    });
+    Route::controller(MenuAssetController::class)->prefix('/assets')->group(function () {
+        Route::post('/{id}', 'create');
+        Route::delete('/{id}', 'delete');
     });
     Route::controller(MenuController::class)->group(function () {
         Route::get('/', 'get');
         Route::get('/{id}', 'find');
         Route::post('/', 'create');
+        Route::patch('/{id}', 'update');
+        Route::delete('/{id}', 'delete');
     });
 });

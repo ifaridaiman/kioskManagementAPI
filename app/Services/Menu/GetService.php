@@ -20,7 +20,7 @@ class GetService
     public function get($request)
     {
         try {
-            return MenuCategory::with('menus.menuInventory.orderType')
+            return MenuCategory::with(['menus.menuInventory.orderType', 'menus.menuAsset'])
                 ->when($request->has('orderType'), function (Builder $query) use ($request) {
                     $query->whereHas('menus.menuInventory', function (Builder $menuInventory) use ($request) {
                         $menuInventory->where('order_type_id', $request->orderType);
